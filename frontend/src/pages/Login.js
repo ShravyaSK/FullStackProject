@@ -1,22 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Button, message } from "antd";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
 import { LoginUser } from "../apicalls/users";
 
 function Login() {
-    const onFinish= async (values)=>{
-        try {
-            const {data} = await LoginUser(values)
-           if(data.success) {
-                message.success(data.message)
-                localStorage.setItem("token", data.data)
-           } else {
-            message.error(data.message)
-           }
-        } catch (error) {
-            message.error("Internal server error")
-        }
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  });
+  const onFinish = async (values) => {
+    try {
+      const { data } = await LoginUser(values);
+      if (data.success) {
+        message.success(data.message);
+        localStorage.setItem("token", data.data);
+      } else {
+        message.error(data.message);
       }
+    } catch (error) {
+      message.error("Internal server error");
+    }
+  };
   return (
     <div className="flex justify-center h-screen items-center bg-primary">
       <div className="card p-3 w-400">

@@ -1,7 +1,5 @@
 const { axiosInstance } = require("./axiosInstance");
 
-// Register a new User
-
 export const RegisterUser = async (payload) => {
   try {
     const response = await axiosInstance().post(
@@ -26,7 +24,13 @@ export const LoginUser = async (payload) => {
   }
 };
 
-//get Current User
 export const GetCurrentUser = async () => {
-  
+  try {
+    const response = await axiosInstance().get(
+      `http://localhost:8080/api/users/get-current-user`
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
 };
