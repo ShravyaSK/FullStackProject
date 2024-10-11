@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MovieForm from "./MovieForm";
 import moment from "moment";
 import { Button, message, Table } from "antd";
-import { GetAllMovies } from "../../apicalls/movies";
+import { DeleteMovie, GetAllMovies } from "../../apicalls/movies";
 
 function MoviesList() {
   const [movies, setMovies] = useState([]);
@@ -27,6 +27,22 @@ function MoviesList() {
   useEffect(() => {
     getData();
   }, []);
+
+  const handleDelete = async (movieId) => {
+    try {
+      const response = await DeleteMovie({
+        movieId: movieId,
+      });
+      if (response.data.success) {
+        message.success("Movie Deleted Sucessfully!");
+        getData();
+      } else {
+        message.error("Something went wrong!");
+      }
+    } catch (error) {
+      message.error("Something went wrong!");
+    }
+  };
 
   const columns = [
     {
@@ -78,7 +94,12 @@ function MoviesList() {
       render: (text, record) => {
         return (
           <div className="flex gap-1">
-            <i className="ri-delete-bin-line" onClick={() => {}}></i>
+            <i
+              className="ri-delete-bin-line"
+              onClick={() => {
+                handleDelete(record._id);
+              }}
+            ></i>
             <i
               className="ri-pencil-line"
               onClick={() => {

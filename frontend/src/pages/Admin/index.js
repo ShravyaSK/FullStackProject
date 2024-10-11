@@ -10,8 +10,6 @@ function Admin() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the current user is an admin
-    // If not, redirect them to home page
     if (!user.isAdmin) {
       navigate("/");
     }

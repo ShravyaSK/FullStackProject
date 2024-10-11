@@ -1,9 +1,9 @@
-const { axiosInstance } = require("./axiosInstance");
+import { axiosInstance } from "./axiosInstance";
 
-export const GetAllMovies = async (payload) => {
+export const GetTheatresByUserId = async (payload) => {
   try {
     const response = await axiosInstance().get(
-      `http://localhost:8080/api/movies/list`,
+      `http://localhost:8080/api/theatres/get-all-theatres-by-user-id`,
       payload
     );
     return response;
@@ -12,10 +12,10 @@ export const GetAllMovies = async (payload) => {
   }
 };
 
-export const AddMovie = async (payload) => {
+export const AddTheatre = async (payload) => {
   try {
     const response = await axiosInstance().post(
-      `http://localhost:8080/api/movies/add-movie`,
+      `http://localhost:8080/api/theatres/add-theatre`,
       payload
     );
     return response;
@@ -24,10 +24,10 @@ export const AddMovie = async (payload) => {
   }
 };
 
-export const UpdateMovie = async (payload) => {
+export const UpdateTheatre = async (payload) => {
   try {
     const response = await axiosInstance().post(
-      `http://localhost:8080/api/movies/update-movie`,
+      `http://localhost:8080/api/theatres/update-theatre`,
       payload
     );
     return response;
@@ -36,10 +36,10 @@ export const UpdateMovie = async (payload) => {
   }
 };
 
-export const DeleteMovie = async (payload) => {
+export const DeleteTheatre = async (payload) => {
   try {
     const response = await axiosInstance().post(
-      `http://localhost:8080/api/movies/delete-movie`,
+      `http://localhost:8080/api/theatres/delete-theatre`,
       payload
     );
     return response;
