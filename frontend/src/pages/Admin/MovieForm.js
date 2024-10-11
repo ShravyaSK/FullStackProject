@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Col, Form, Modal, Row } from "antd";
+import { Button, Col, Form, Modal, Row, message } from "antd";
 import moment from "moment";
+import { AddMovie, UpdateMovie } from "../../apicalls/movies";
 
 function MovieForm({
   showMovieFormModal,
@@ -8,12 +9,42 @@ function MovieForm({
   selectedMovie,
   setSelectedMovie,
   formType,
+  getData,
 }) {
   if (selectedMovie) {
     selectedMovie.releaseDate = moment(selectedMovie.releaseDate).format(
       "YYYY-MM-DD"
     );
   }
+
+  const onFinish = async (values) => {
+    try {
+      let response = null;
+
+      if (formType === "add") {
+        response = await AddMovie(values);
+      } else {
+        response = await UpdateMovie({
+          ...values,
+          movieId: selectedMovie._id,
+        });
+      }
+
+      if (response.data.success) {
+        if (formType === "add") {
+          message.success("New Movie Added!");
+        } else {
+          message.success("Movie edited successfully!");
+        }
+        setShowMovieFormModal(false);
+        getData();
+      } else {
+        message.error("Something went wrong");
+      }
+    } catch (error) {
+      message.error("Something went wrong");
+    }
+  };
 
   return (
     <Modal
@@ -26,7 +57,7 @@ function MovieForm({
       footer={null}
       width={800}
     >
-      <Form layout="vertical" initialValues={selectedMovie}>
+      <Form layout="vertical" onFinish={onFinish} initialValues={selectedMovie}>
         <Row gutter={16}>
           <Col span={24}>
             <Form.Item label="Movie Name" name="title">

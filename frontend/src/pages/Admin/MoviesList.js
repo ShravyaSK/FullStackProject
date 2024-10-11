@@ -10,7 +10,6 @@ function MoviesList() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [formType, setFormType] = useState("add");
 
-
   const getData = async (req, res) => {
     try {
       const { data } = await GetAllMovies();
@@ -77,17 +76,15 @@ function MoviesList() {
       title: "Action",
       dataIndex: "action",
       render: (text, record) => {
-        console.log({ text });
         return (
           <div className="flex gap-1">
-            <i
-              className="ri-delete-bin-line"
-              onClick={() => {
-              }}
-            ></i>
+            <i className="ri-delete-bin-line" onClick={() => {}}></i>
             <i
               className="ri-pencil-line"
               onClick={() => {
+                setSelectedMovie(record);
+                setFormType("edit");
+                setShowMovieFormModal(true);
               }}
             ></i>
           </div>
@@ -119,7 +116,7 @@ function MoviesList() {
           selectedMovie={selectedMovie}
           setSelectedMovie={setSelectedMovie}
           formType={formType}
-          //  getData={getData}
+          getData={getData}
         />
       )}
     </div>

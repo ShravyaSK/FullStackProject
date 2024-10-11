@@ -35,4 +35,19 @@ router.get("/list", async (req, res) => {
   }
 });
 
+router.post("/update-movie", async (req, res) => {
+  try {
+    await Movie.findByIdAndUpdate(req.body.movieId, req.body);
+    res.send({
+      success: true,
+      message: "Movie updated with latest info!",
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      error: "Something went wrong!",
+    });
+  }
+});
+
 module.exports = router;
