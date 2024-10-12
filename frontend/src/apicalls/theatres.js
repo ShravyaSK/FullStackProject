@@ -12,6 +12,17 @@ export const GetTheatresByUserId = async (payload) => {
   }
 };
 
+export const GetAllTheatres = async () => {
+  try {
+    const response = await axiosInstance().get(
+      `http://localhost:8080/api/theatres/get-all-theatres`
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const AddTheatre = async (payload) => {
   try {
     const response = await axiosInstance().post(

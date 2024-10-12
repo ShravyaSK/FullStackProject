@@ -69,4 +69,22 @@ router.get("/get-all-theatres-by-user-id", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/get-all-theatres", async (req, res) => {
+  try {
+    const theatres = await Theatre.find()
+      .populate("owner", "name email")
+
+    res.status(200).send({
+      success: true,
+      message: "Theatres fetched",
+      theatres,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "There was some issue in fetching theatres for user.",
+    });
+  }
+});
+
 module.exports = router;

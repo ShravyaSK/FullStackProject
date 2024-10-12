@@ -4,6 +4,7 @@ import { Tabs } from "antd";
 import MoviesList from "./MoviesList";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import TheatresList from "./TheatresList";
 
 function Admin() {
   const { user } = useSelector((state) => state.users);
@@ -25,7 +26,7 @@ function Admin() {
         </Tabs.TabPane>
 
         <Tabs.TabPane tab="Theatres" key="2">
-          <p>TheatresList</p>
+          <TheatresList />
         </Tabs.TabPane>
         <Tabs.TabPane tab="Upcoming Movies" key="3">
           <p>Upcoming</p>
