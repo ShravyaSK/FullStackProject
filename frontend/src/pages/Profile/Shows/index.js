@@ -1,7 +1,11 @@
 import { Col, Form, Modal, Row, Table, Button, message } from "antd";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import { GetShowsByTheatreId } from "../../../apicalls/shows";
+import {
+  AddShow,
+  DeleteShow,
+  GetShowsByTheatreId,
+} from "../../../apicalls/shows";
 import { GetAllMovies } from "../../../apicalls/movies";
 
 function Shows({ openShowsModal, setOpenShowsModal, theatre }) {
@@ -83,7 +87,7 @@ function Shows({ openShowsModal, setOpenShowsModal, theatre }) {
               <i
                 className="ri-delete-bin-line"
                 onClick={() => {
-                  //   handleDelete(record._id);
+                  handleDelete(record._id);
                 }}
               ></i>
             )}
@@ -92,6 +96,42 @@ function Shows({ openShowsModal, setOpenShowsModal, theatre }) {
       },
     },
   ];
+
+  const handleAddShow = async (values) => {
+    try {
+      const response = await AddShow({
+        ...values,
+        theatre: theatre._id,
+      });
+
+      if (response.data.success) {
+        message.success(response.data.message);
+        setView("table");
+        getData();
+      } else {
+        message.error(response.data.message);
+      }
+    } catch (error) {
+      message.error(error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await DeleteShow({
+        showId: id,
+      });
+
+      if (response.data.success) {
+        message.success(response.data.message);
+        getData();
+      } else {
+        message.error(response.message);
+      }
+    } catch (error) {
+      message.error(error);
+    }
+  };
 
   return (
     <Modal
@@ -126,7 +166,7 @@ function Shows({ openShowsModal, setOpenShowsModal, theatre }) {
       {view === "list" && <Table columns={columns} dataSource={shows} />}
 
       {view === "form" && (
-        <Form layout="vertical" onFinish={() => {}}>
+        <Form layout="vertical" onFinish={handleAddShow}>
           <Row gutter={[16, 16]}>
             <Col span={8}>
               <Form.Item
@@ -165,7 +205,7 @@ function Shows({ openShowsModal, setOpenShowsModal, theatre }) {
               >
                 <select>
                   <option value="">Select Movie</option>
-                  {[].map((movie) => (
+                  {movies.map((movie) => (
                     <option value={movie._id}>{movie.title}</option>
                   ))}
                 </select>

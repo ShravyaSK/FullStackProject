@@ -21,3 +21,27 @@ export const GetShowById = async (showId) => {
     return error;
   }
 };
+
+export const AddShow = async (payload) => {
+  try {
+    const response = await axiosInstance().post(
+      `http://localhost:8080/api/shows/add-show`,
+      payload
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const DeleteShow = async (payload) => {
+  try {
+    const response = await axiosInstance().post(
+      `http://localhost:8080/api/shows/delete-show`,
+      payload
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
