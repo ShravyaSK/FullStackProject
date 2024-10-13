@@ -23,6 +23,18 @@ export const GetAllTheatres = async () => {
   }
 };
 
+export const GetAllTheatresForMovie = async (payload) => {
+  try {
+    const response = await axiosInstance().post(
+      `http://localhost:8080/api/theatres/get-theatres-for-movie`,
+      payload
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const AddTheatre = async (payload) => {
   try {
     const response = await axiosInstance().post(

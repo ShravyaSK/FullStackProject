@@ -2,6 +2,7 @@ const router = require("express").Router();
 const authMiddleware = require("../middleware/authMiddleware");
 const Movie = require("../models/movieModel");
 const Theatre = require("../models/theatreModal");
+const Show = require("../models/showModel");
 
 router.post("/add-theatre", async (req, res) => {
   try {
@@ -71,8 +72,7 @@ router.get("/get-all-theatres-by-user-id", authMiddleware, async (req, res) => {
 
 router.get("/get-all-theatres", async (req, res) => {
   try {
-    const theatres = await Theatre.find()
-      .populate("owner", "name email")
+    const theatres = await Theatre.find().populate("owner", "name email");
 
     res.status(200).send({
       success: true,
@@ -83,6 +83,47 @@ router.get("/get-all-theatres", async (req, res) => {
     res.status(500).send({
       success: false,
       message: "There was some issue in fetching theatres for user.",
+    });
+  }
+});
+
+router.post("/get-theatres-for-movie", authMiddleware, async (req, res) => {
+  try {
+    const { movieId } = req.body;
+    const shows = await Show.find({ movie: movieId }).populate("theatre");
+
+    const uniqueTheatres = [];
+
+    shows.forEach((show) => {
+      const theatre = uniqueTheatres.find(
+        (theatreCurrent) => theatreCurrent._id === show.theatre._id
+      );
+
+      if (!theatre) {
+        const showsForTheatres = shows
+          .filter((showObj) => show.theatre._id === showObj.theatre._id)
+          .map((show) => ({
+            ...show,
+            allSeatsBooked: show.bookedSeats.length === show.totalSeats,
+          }));
+
+        uniqueTheatres.push({
+          shows: showsForTheatres,
+          ...show.theatre._doc,
+        });
+      }
+    });
+
+    res.send({
+      success: true,
+      messages: "Theatres for movie fetched!",
+      data: uniqueTheatres,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send({
+      success: false,
+      messages: "Something went wrong",
     });
   }
 });

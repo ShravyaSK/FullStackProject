@@ -12,6 +12,8 @@ import "./stylesheets/sizes.css";
 import "./stylesheets/theme.css";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
+import Bookshow from "./pages/Bookshow";
+import TheatresForMovie from "./pages/TheatresForMovie ";
 
 function App() {
   return (
@@ -42,6 +44,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/book-show/:showId"
+            element={
+              <ProtectedRoute>
+                <Bookshow />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/movie/:id"
+            element={
+              <ProtectedRoute>
+                <TheatresForMovie />
               </ProtectedRoute>
             }
           />
