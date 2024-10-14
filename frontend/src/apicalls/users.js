@@ -1,9 +1,11 @@
+import { BASEURL } from "./booking";
+
 const { axiosInstance } = require("./axiosInstance");
 
 export const RegisterUser = async (payload) => {
   try {
     const response = await axiosInstance().post(
-      `http://localhost:8080/api/users/register`,
+      `https://${BASEURL}/api/users/register`,
       payload
     );
     return response;
@@ -15,7 +17,7 @@ export const RegisterUser = async (payload) => {
 export const LoginUser = async (payload) => {
   try {
     const response = await axiosInstance().post(
-      `http://localhost:8080/api/users/login`,
+      `https://${BASEURL}/api/users/login`,
       payload
     );
     return response;
@@ -27,7 +29,7 @@ export const LoginUser = async (payload) => {
 export const GetCurrentUser = async () => {
   try {
     const response = await axiosInstance().get(
-      `http://localhost:8080/api/users/get-current-user`
+      `https://${BASEURL}/api/users/get-current-user`
     );
     return response.data;
   } catch (error) {

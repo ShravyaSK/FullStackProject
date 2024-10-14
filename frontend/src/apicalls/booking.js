@@ -1,9 +1,11 @@
 import { axiosInstance } from "./axiosInstance";
 
+export const BASEURL = "bms-project-4kbl.onrender.com";
+
 export const MakePayment = async (payload) => {
   try {
     const response = await axiosInstance().post(
-      `http://localhost:8080/api/booking/make-payment`,
+      `https://${BASEURL}/api/booking/make-payment`,
       payload
     );
     return response;
@@ -15,7 +17,7 @@ export const MakePayment = async (payload) => {
 export const BookShowTickets = async (payload) => {
   try {
     const response = await axiosInstance().post(
-      `http://localhost:8080/api/booking/book-show`,
+      `https://${BASEURL}/api/booking/book-show`,
       payload
     );
     return response;
@@ -27,7 +29,7 @@ export const BookShowTickets = async (payload) => {
 export const GetBookingsOfUser = async () => {
   try {
     const response = await axiosInstance().get(
-      "http://localhost:8080/api/booking/get-bookings"
+      `https://${BASEURL}/api/booking/get-bookings`
     );
     return response;
   } catch (error) {
