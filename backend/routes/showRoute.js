@@ -89,4 +89,23 @@ router.get("/get-show-by-id/:showId", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/get-show-by-id/:showId", authMiddleware, async (req, res) => {
+  try {
+    const show = await Show.findById(req.params.showId)
+      .populate("movie")
+      .populate("theatre");
+
+    res.status(200).send({
+      success: true,
+      message: "Show fetched",
+      show,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "There was some issue in fetching this show.",
+    });
+  }
+});
+
 module.exports = router;

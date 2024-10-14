@@ -1,26 +1,28 @@
 import React, { useEffect } from "react";
-import { Form, Button, message } from "antd";
+import { Form, message, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginUser } from "../apicalls/users";
 
 function Login() {
   const navigate = useNavigate();
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/");
     }
-  });
+  }, []);
   const onFinish = async (values) => {
     try {
       const { data } = await LoginUser(values);
       if (data.success) {
         message.success(data.message);
         localStorage.setItem("token", data.data);
+        navigate("/");
       } else {
         message.error(data.message);
       }
     } catch (error) {
-      message.error("Internal server error");
+      message.error("Internal Server Error");
     }
   };
   return (

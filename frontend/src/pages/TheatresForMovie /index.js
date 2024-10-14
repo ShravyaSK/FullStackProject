@@ -77,18 +77,18 @@ function TheatresForMovie() {
                 )
                 .map((show) => (
                   <div
-                    key={show._id}
+                    key={show?._id}
                     style={{
                       backgroundColor: isHovering ? "#DF1827" : "white",
                       color: isHovering ? "white" : "#DF1827",
                     }}
                     className="card p-1 cursor-pointer border-primary"
                     onClick={() => {
-                      navigate(`/book-show/${show._id}`);
+                      navigate(`/book-show/${show._doc?._id}`);
                     }}
                   >
                     <h1 className="text-sm">
-                      {moment(show.time, "HH:mm").format("hh:mm A")}
+                      {moment(show.time).format("h:mm A")}
                     </h1>
                   </div>
                 ))}

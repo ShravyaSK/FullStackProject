@@ -2,6 +2,7 @@ import React from "react";
 import { Tabs } from "antd";
 import PageTitle from "../../components/PageTitle";
 import TheatresList from "./TheatresList";
+import Booking from "./Booking";
 
 function Profile() {
   return (
@@ -10,7 +11,7 @@ function Profile() {
 
       <Tabs defaultActiveKey="1">
         <Tabs.TabPane tab="Bookings" key="1">
-          Bookings
+          <Booking />
         </Tabs.TabPane>
         <Tabs.TabPane tab="Apply for Theater" key="2">
           <TheatresList />
