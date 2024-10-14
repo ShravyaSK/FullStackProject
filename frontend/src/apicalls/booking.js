@@ -1,6 +1,8 @@
 import { axiosInstance } from "./axiosInstance";
 
-export const BASEURL = "bms-project-4kbl.onrender.com";
+// export const BASEURL = "bms-project-4kbl.onrender.com";
+export const BASEURL = window.location.host;
+
 
 export const MakePayment = async (payload) => {
   try {
