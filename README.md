@@ -1,7 +1,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is a full-stack web application built using the MERN (MongoDB, Express, React, Node.js) stack. The application offers user management, secure payment integration using Stripe, and various security features to ensure a smooth and safe user experience.
+This project is a full-stack web application built using the MERN (MongoDB, Express, React, Node.js) stack. The application offers user management, secure payment integration using Stripe, and various security features to ensure a smooth and safe user experience. You can access the project using the link https://fullstackproject-wx8y.onrender.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
