@@ -1,35 +1,6 @@
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">Fullstack Web Application</a>
-      <ul>
-        <li><a href="#technologies-used">Technologies Used</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="project-setup">Project Setup</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 This project is a full-stack web application built using the MERN (MongoDB, Express, React, Node.js) stack. The application offers user management, secure payment integration using Stripe, and various security features to ensure a smooth and safe user experience.
 
